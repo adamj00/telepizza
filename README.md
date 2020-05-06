@@ -1,5 +1,6 @@
 # Telepizza system
 Projekt na programowanie obiektowe. System obsługi pizzerii w Javie
+
 Funkcjonalności:
 - edycja listy produktów
 - wprowadzanie zamówień
@@ -8,3 +9,4 @@ Funkcjonalności:
 - panel kierowcy
 - statystyki
 - system logowania
+- system okienkowy
