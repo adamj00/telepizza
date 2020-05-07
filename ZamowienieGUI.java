@@ -16,7 +16,7 @@ public class ZamowienieGUI {
     JButton usunButton = new JButton ("Usuń");
     JButton odswiezButton = new JButton ("Odśwież");
 
-    LinkedList<Produkt> produktyDodane = new LinkedList<Produkt>();
+    LinkedList<Pair> produktyDodane = new LinkedList<Pair>();
     LinkedList<Produkt> produktyWszystkie = new LinkedList<Produkt>();
 
     Object [] row = new Object [3]; 
@@ -52,7 +52,8 @@ public class ZamowienieGUI {
         frame.setLayout(null);
 
         dodajButton.addActionListener(event -> dodaj_produkt());
-
+        usunButton.addActionListener(event -> usun_produkt());
+        
         frame.add (pane);
 
        frame.add (produktSelectList);
@@ -95,14 +96,30 @@ public class ZamowienieGUI {
     }
 
     private void dodaj_produkt () {
+        int idx = produktSelectList.getSelectedIndex();
+        String dodawana_nazwa = produktyWszystkie.get(produktSelectList.getSelectedIndex()).nazwa;
+        for (int i = 0; i < produktyDodane.size(); i++){
+            if (produktyDodane.get(i).getP().nazwa.compareTo(dodawana_nazwa) == 0){
+                produktyDodane.get(i).incI(Integer.parseInt(textIlosc.getText()));
+                model.setValueAt(produktyDodane.get(i).getI(), i, 2);
+                return;
+            }
+        }
         
-        row [0] = produktyWszystkie.get(produktSelectList.getSelectedIndex()).nazwa;
+        row [0] = produktyWszystkie.get(idx).nazwa;
         row[1] = produktyWszystkie.get(produktSelectList.getSelectedIndex()).cena;
         row[2] = textIlosc.getText();
         model.addRow(row);
+    
+        produktyDodane.add (new Pair (produktyWszystkie.get(idx),1));
+    }
 
-        for (int i=0; i<Integer.parseInt(textIlosc.getText()) ; i++)
-            produktyDodane.add (produktyWszystkie.get(produktSelectList.getSelectedIndex()));
+    private void usun_produkt () {
+        int i = table.getSelectedRow();
+        if (i >= 0) {
+            produktyDodane.remove (i);
+            model.removeRow(i);
+        }
     }
 
 }
