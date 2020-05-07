@@ -1,4 +1,6 @@
-public class Produkt {
+import java.io.Serializable;
+@SuppressWarnings("serial")
+public class Produkt implements Serializable {
     String nazwa = "";
     double cena = 0.0;
     Produkt(String n, double c) {
@@ -11,6 +13,6 @@ public class Produkt {
         cena = c;
     }
     public String toString(){
-        return  nazwa + "\t" + cena;
+        return  nazwa + "\t\t" + cena;
     }
 }
