@@ -6,11 +6,22 @@ import java.io.*;
 public class ZamowienieGUI {
     String [] comboStrings;
     
-    JFrame frame = new JFrame ();
+    JLabel temp = new JLabel("TU będą dane klienta!");
+    JTabbedPane tabbedPane = new JTabbedPane();
+
+    JPanel zamowieniePanel = new JPanel ();
+    JPanel danePanel = new JPanel();
+    JFrame main_frame = new JFrame ();
     JTable table = new JTable () ;
     
     JComboBox produktSelectList;
     JTextField textIlosc = new JTextField();
+
+   // JTextField textAdres = new JTextfield ();
+    //JTextField textNr = new JTextfield ();
+    //JTextField textUwagi = new JTextfield ();
+    //JLabel adresLabel = new JLabel ("Adres dostawy");
+    //JLabel numerLabel = new JLabel ("Adres dostawy");
 
     JButton dodajButton = new JButton ("Dodaj");
     JButton usunButton = new JButton ("Usuń");
@@ -32,14 +43,16 @@ public class ZamowienieGUI {
         table.setModel (model);
 
        
+        danePanel.add (temp);
+        tabbedPane.add ("Zamówienie",zamowieniePanel);
+        tabbedPane.add ("Dane klienta",danePanel);
+        main_frame.add (tabbedPane);
 
         //table.setBackground(Color.cyan);
         //table.setForeground(Color.white);
         table.setRowHeight(30);
         
         produktSelectList.setBounds (20,220,100,25);
-        //textNazwa.setBounds(20,220,100,25);
-      //  textCena.setBounds(20,250,100,25);
         textIlosc.setBounds(20,280,100,25);
 
         dodajButton.setBounds (150,220,100,25);
@@ -49,26 +62,26 @@ public class ZamowienieGUI {
         JScrollPane pane = new JScrollPane(table);
         pane.setBounds(0,0,880,200);
 
-        frame.setLayout(null);
+        zamowieniePanel.setLayout(null);
 
         dodajButton.addActionListener(event -> dodaj_produkt());
         usunButton.addActionListener(event -> usun_produkt());
         
-        frame.add (pane);
+        zamowieniePanel.add (pane);
 
-       frame.add (produktSelectList);
-        // frame.add (textNazwa);
-       // frame.add (textCena);
-        frame.add (textIlosc);
+        zamowieniePanel.add (produktSelectList);
+        zamowieniePanel.add (textIlosc);
 
-        frame.add (dodajButton);
-        frame.add (odswiezButton);
-        frame.add (usunButton);
+        zamowieniePanel.add (dodajButton);
+        zamowieniePanel.add (odswiezButton);
+        zamowieniePanel.add (usunButton);
 
-        frame.setSize(900,400);
-        frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        main_frame.setSize(900,400);
+
+        main_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        zamowieniePanel.setVisible(true);
+        main_frame.setVisible(true);
+        main_frame.add(tabbedPane);
         
     }
 
@@ -106,7 +119,7 @@ public class ZamowienieGUI {
             }
         }
         
-        row [0] = produktyWszystkie.get(idx).nazwa;
+        row[0] = produktyWszystkie.get(idx).nazwa;
         row[1] = produktyWszystkie.get(produktSelectList.getSelectedIndex()).cena;
         row[2] = textIlosc.getText();
         model.addRow(row);
