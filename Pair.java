@@ -1,4 +1,6 @@
-public class Pair {
+import java.io.Serializable;
+
+public class Pair implements Serializable {
     private Produkt p;
     private int ilosc;
     public Pair (Produkt pr, int il){
@@ -23,5 +25,8 @@ public class Pair {
     }
     public void incI (int x){
         ilosc +=x;
+    }
+    public String toString () {
+        return p.nazwa + " x " + ilosc;
     }
 }

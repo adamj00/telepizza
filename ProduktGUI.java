@@ -107,4 +107,6 @@ public class ProduktGUI extends JFrame {
         }
         JOptionPane.showMessageDialog(null, "Nie ma produktu o takiej nazwie", "Błąd", 0);
     }
+
+    
 }

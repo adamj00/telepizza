@@ -10,15 +10,18 @@ public class Zamowienie implements Serializable {
     boolean platnosc_karta = false;
     Date data_zamowienia = new Date ();
     String uwagi = "";
+    String email = "";
 
-    public Zamowienie (LinkedList<Pair> pL, String a, String n, boolean p, Date d, String u){
+    public Zamowienie (LinkedList<Pair> pL, String a, String n, boolean p, Date d, String u, String e){
         produktList = pL;
         adres = a;
         nr_tel = n;
         platnosc_karta = p;
         data_zamowienia = d;
         uwagi = u;
+        email = e;
     }
+    public Zamowienie (){}
 
     public double wartosc_zamowienia () {
         double wynik = 0.0;
@@ -26,5 +29,9 @@ public class Zamowienie implements Serializable {
             wynik += p.getP().cena * p.getI();
         }
         return wynik;
+    }
+
+    public String toString () {
+        return "Zamówienie na kwotę " + wartosc_zamowienia() + " PLN \nZłożone " + data_zamowienia.toString();
     }
 }
