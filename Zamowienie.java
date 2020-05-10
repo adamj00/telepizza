@@ -3,7 +3,7 @@ import java.io.Serializable;
 import java.util.Date;
 @SuppressWarnings("serial")
 public class Zamowienie implements Serializable {
-    LinkedList<Produkt> produktList = new LinkedList<Produkt>();
+    LinkedList<Pair> produktList = new LinkedList<Pair>();
 
     String adres = "";
     String nr_tel = "";
@@ -11,7 +11,7 @@ public class Zamowienie implements Serializable {
     Date data_zamowienia = new Date ();
     String uwagi = "";
 
-    public Zamowienie (LinkedList<Produkt> pL, String a, String n, boolean p, Date d, String u){
+    public Zamowienie (LinkedList<Pair> pL, String a, String n, boolean p, Date d, String u){
         produktList = pL;
         adres = a;
         nr_tel = n;
@@ -22,8 +22,8 @@ public class Zamowienie implements Serializable {
 
     public double wartosc_zamowienia () {
         double wynik = 0.0;
-        for (Produkt p : produktList){
-            wynik += p.cena;
+        for (Pair p : produktList){
+            wynik += p.getP().cena * p.getI();
         }
         return wynik;
     }
